@@ -1,21 +1,21 @@
 sudo: required
 
+dist: trusty
+
 language: php
 
 matrix:
   include:
-    - php: 5.4
-      env: DB=mysqli
-    - php: 5.4
-      env: DB=mysql
-    - php: 5.4
-      env: DB=mariadb
-    - php: 5.4
-      env: DB=postgres
-    - php: 5.4
-      env: DB=sqlite3
+    - php: 5.5
+      env: DB=mysqli;NOTESTS=1
     - php: 5.5
       env: DB=mysqli
+    - php: 5.5
+      env: DB=mysql
+    - php: 5.5
+      env: DB=mariadb
+    - php: 5.5
+      env: DB=postgres
     - php: 5.6
       env: DB=mysqli
     - php: 7.0
@@ -40,6 +40,13 @@ branches:
     - /^\d+(\.\d+)?\.x$/
 
 install:
+  - travis/prepare-phpbb.sh $EXTNAME $PHPBB_BRANCH
+  - cd ../../phpBB3
+  - travis/prepare-extension.sh $EXTNAME $PHPBB_BRANCH
+  - travis/setup-phpbb.sh $DB $TRAVIS_PHP_VERSION $NOTESTS
+  - ../paybas/pbwow/travis/prepare-epv.sh $EPV $NOTESTS
+
+
   - travis/prepare-phpbb.sh $EXTNAME $PHPBB_BRANCH
   - cd ../../phpBB3
   - travis/prepare-extension.sh $EXTNAME $PHPBB_BRANCH
