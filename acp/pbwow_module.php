@@ -9,6 +9,11 @@
 
 namespace paybas\pbwow\acp;
 
+/**
+ * Class pbwow_module
+ *
+ * @package paybas\pbwow\acp
+ */
 class pbwow_module
 {
 	public $u_action;
@@ -18,19 +23,23 @@ class pbwow_module
 	protected $pbwow_config;
 	protected $pbwow_chars_table;
 
-	function main($id, $mode)
+	/**
+	 * @param $id
+	 * @param $mode
+	 */
+	public function main($id, $mode)
 	{
 		global $cache, $config, $request, $template, $user;
 		global $phpbb_log, $phpbb_root_path, $table_prefix, $phpbb_container;
+
+		$user->add_lang('acp/board');
+		$this->tpl_name = 'acp_pbwow3';
 
 		$db_tools = $phpbb_container->get('dbal.tools');
 
 		$this->fields_table = $phpbb_container->getParameter('tables.profile_fields');
 		$this->pbwow_config_table = $phpbb_container->getParameter('tables.pbwow3_config');
 		$this->pbwow_chars_table = $phpbb_container->getParameter('tables.pbwow3_chars');
-
-		$user->add_lang('acp/board');
-		$this->tpl_name = 'acp_pbwow3';
 
 		$allow_curl = function_exists('curl_init');
 		$legacy_dbtable1 = defined('PBWOW_CONFIG_TABLE') ? PBWOW_CONFIG_TABLE : '';

@@ -65,11 +65,11 @@ class pbwow
 	/**
 	 * pbwow constructor.
 	 *
-	 * @param config                            $config
-	 * @param service                           $cache
-	 * @param driver_interface $db
-	 * @param tools                   $db_tools
-	 * @param dispatcher_interface $dispatcher
+	 * @param \phpbb\config\config              $config
+	 * @param \phpbb\cache\service              $cache
+	 * @param \phpbb\db\driver\driver_interface $db
+	 * @param \phpbb\db\tools\tools             $db_tools
+	 * @param \phpbb\event\dispatcher_interface $dispatcher
 	 * @param \phpbb\extension\manager          $extension_manager
 	 * @param \phpbb\profilefields\manager      $profilefields_manager
 	 * @param \phpbb\template\template          $template
@@ -80,7 +80,7 @@ class pbwow
 	 * @param                                   $pbwow_config_table
 	 * @param                                   $pbwow_chars_table
 	 */
-	public function __construct(config $config, service $cache, driver_interface $db, tools $db_tools, dispatcher_interface $dispatcher, \phpbb\extension\manager $extension_manager, \phpbb\profilefields\manager $profilefields_manager, \phpbb\template\template $template, \phpbb\user $user, \phpbb\path_helper $path_helper, $root_path, $phpEx, $pbwow_config_table, $pbwow_chars_table)
+	public function __construct(config $config, service $cache, driver_interface $db, \phpbb\db\tools\tools $db_tools, dispatcher_interface $dispatcher, \phpbb\extension\manager $extension_manager, \phpbb\profilefields\manager $profilefields_manager, \phpbb\template\template $template, \phpbb\user $user, \phpbb\path_helper $path_helper, $root_path, $phpEx, $pbwow_config_table, $pbwow_chars_table)
 	{
 		$this->config = $config;
 		$this->cache = $cache;
