@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener implements EventSubscriberInterface
 {
 	/**
-	 * @var \paybas\pbwow\core\pbwow
+	 * @var \paybas\pbwow\core\pbwow_style
 	 */
 	protected $pbwow;
 
@@ -26,7 +26,7 @@ class listener implements EventSubscriberInterface
 	 * listener constructor.
 	 * @param \paybas\pbwow\core\pbwow $pbwow
 	 */
-	public function __construct(\paybas\pbwow\core\pbwow $pbwow)
+	public function __construct(\paybas\pbwow\core\pbwowstyle $pbwow)
 	{
 		$this->pbwow = $pbwow;
 	}

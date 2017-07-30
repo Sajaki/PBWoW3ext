@@ -1,7 +1,11 @@
 ## Changelog
 
- ##### 3.0.5b 30/12/2016
- - [FIX] fix in migrations
+##### 3.2.0 30/7/2017
+- [UPG] #4 3.2 Rhea version
+- [DEL] #3 removed battle.NET avatars and profile fields. this fits better in a special extension.    
+ 
+##### 3.0.5b 30/12/2016
+- [FIX] fix in migrations
 
 ##### 3.0.5 18/12/2016
 - [FIX] ACP now correctly sets the version color to red when extension is not up to date. 

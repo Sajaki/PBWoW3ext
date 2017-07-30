@@ -1,17 +1,17 @@
 {
    "unstable":{
-      "3.0":{
-         "current":"3.0.5",
-         "style_version":"3.1.10",
+      "3.2":{
+         "current":"3.2.0",
+         "style_version":"3.2.10",
          "announcement":"http://www.avathar.be/bbdkp/app.php/dl_ext/?cat=1",
          "eol":null,
          "security":false
       }
    },
    "stable":{
-      "3.0":{
-         "current":"3.0.5",
-         "style_version":"3.1.10",
+      "3.2":{
+         "current":"3.2.0",
+         "style_version":"3.2.0",
          "announcement":"http://www.avathar.be/bbdkp/app.php/dl_ext/?cat=1",
          "eol":null,
          "security":false

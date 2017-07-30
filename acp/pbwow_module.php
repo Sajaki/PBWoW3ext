@@ -9,34 +9,35 @@
 
 namespace paybas\pbwow\acp;
 
+/**
+ * Class pbwow_module
+ *
+ * @package paybas\pbwow\acp
+ */
 class pbwow_module
 {
 	public $u_action;
 
-	protected $fields_table;
 	protected $pbwow_config_table;
 	protected $pbwow_config;
-	protected $pbwow_chars_table;
 
-	function main($id, $mode)
+	/**
+	 * @param $id
+	 * @param $mode
+	 */
+	public function main($id, $mode)
 	{
 		global $cache, $config, $request, $template, $user;
 		global $phpbb_log, $phpbb_root_path, $table_prefix, $phpbb_container;
 
-		$db_tools = $phpbb_container->get('dbal.tools');
-
-		$this->fields_table = $phpbb_container->getParameter('tables.profile_fields');
-		$this->pbwow_config_table = $phpbb_container->getParameter('tables.pbwow3_config');
-		$this->pbwow_chars_table = $phpbb_container->getParameter('tables.pbwow3_chars');
-
 		$user->add_lang('acp/board');
 		$this->tpl_name = 'acp_pbwow3';
 
-		$allow_curl = function_exists('curl_init');
-		$legacy_dbtable1 = defined('PBWOW_CONFIG_TABLE') ? PBWOW_CONFIG_TABLE : '';
-		$legacy_dbtable2 = defined('PBWOW2_CONFIG_TABLE') ? PBWOW2_CONFIG_TABLE : '';
+		$db_tools = $phpbb_container->get('dbal.tools');
 
-		$constantsokay = $dbokay = $legacy_constants = $legacy_db_active = $chars_constokay = $chars_dbokay = $new_config = $ext_version = false;
+		$this->pbwow_config_table = $phpbb_container->getParameter('tables.pbwow3_config');
+
+		$constantsokay = $dbokay = $new_config = $ext_version = false;
 
 		// Check if constants have been set correctly
 		// if yes, check if the config table exists
@@ -53,31 +54,6 @@ class pbwow_module
 			}
 		}
 
-		if ($this->pbwow_chars_table == ($table_prefix . 'pbwow3_chars'))
-		{
-			$chars_constokay = true;
-
-			if ($db_tools->sql_table_exists($this->pbwow_chars_table))
-			{
-				$chars_dbokay = true;
-			}
-		}
-
-		// Detect if a game has been enabled/disabled in the overview. This must be done before we retrieve the $cplist
-		$cpf_game_toggle = $request->variable('game', '');
-		if (!empty($cpf_game_toggle))
-		{
-			$activate = $request->variable('enable', '');
-			$this->toggle_game_cpf($cpf_game_toggle, $activate);
-		}
-
-		// Detect Battle.net characters table flush
-		$charsdb_flush = $request->variable('charsdb_flush', '');
-		if ($charsdb_flush && $chars_dbokay)
-		{
-			$this->charsdb_flush();
-		}
-
 		if ($mode == 'overview')
 		{
 			// Get the PBWoW extension version from the composer.json file
@@ -85,8 +61,6 @@ class pbwow_module
 			$ext_meta_manager = $ext_manager->create_extension_metadata_manager('paybas/pbwow', $template);
 			$ext_meta_data = $ext_meta_manager->get_metadata('version');
 			$ext_version = isset($ext_meta_data['version']) ? $ext_meta_data['version'] : '';
-
-			$cpflist = $this->get_profile_fields_list();
 
 			$style_root = ($phpbb_root_path . 'styles/pbwow3/');
 
@@ -99,20 +73,6 @@ class pbwow_module
 
 			$versions = $this->version_check($request->variable('versioncheck_force', false));
 
-			// Check if old constants are still being used
-			if (!empty($legacy_dbtable1) || !empty($legacy_dbtable2))
-			{
-				$legacy_constants = true;
-			}
-
-			// Check if old table still exists
-			if ($db_tools->sql_table_exists($legacy_dbtable1)
-				|| $db_tools->sql_table_exists($table_prefix . 'pbwow_config')
-				|| $db_tools->sql_table_exists($legacy_dbtable2)
-				|| $db_tools->sql_table_exists($table_prefix . 'pbwow2_config'))
-			{
-				$legacy_db_active = true;
-			}
 		}
 
 		/**
@@ -151,17 +111,6 @@ class pbwow_module
 						'videobg_enable'      => array('lang' => 'PBWOW_VIDEOBG_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
 						'videobg_allpages'    => array('lang' => 'PBWOW_VIDEOBG_ALLPAGES', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'fixedbg'             => array('lang' => 'PBWOW_FIXEDBG', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-
-						'legend5'             => 'PBWOW_AVATARS',
-						'avatars_enable'      => array('lang' => 'PBWOW_AVATARS_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
-						'avatars_path'        => array('lang' => 'PBWOW_AVATARS_PATH', 'validate' => 'string', 'type' => 'text:20:255', 'explain' => true),
-						'smallranks_enable'   => array('lang' => 'PBWOW_SMALLRANKS_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
-
-						'legend6'             => 'PBWOW_BNETCHARS',
-						'bnetchars_enable'    => array('lang' => 'PBWOW_BNETCHARS_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
-						'bnet_apikey'         => array('lang' => 'PBWOW_BNET_APIKEY', 'validate' => 'string', 'type' => 'text:32:64', 'explain' => true),
-						'bnetchars_cachetime' => array('lang' => 'PBWOW_BNETCHARS_CACHETIME', 'validate' => 'int:0', 'type' => 'text:6:6', 'explain' => true, 'append' => ' ' . $user->lang['SECONDS']),
-						'bnetchars_timeout'   => array('lang' => 'PBWOW_BNETCHARS_TIMEOUT', 'validate' => 'int:0', 'type' => 'text:1:1', 'explain' => true, 'append' => ' ' . $user->lang['SECONDS']),
 
 						'legend7'             => 'PBWOW_ADS_INDEX',
 						'ads_index_enable'    => array('lang' => 'PBWOW_ADS_INDEX_ENABLE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true),
@@ -204,12 +153,6 @@ class pbwow_module
 			if ($submit)
 			{
 				$this->set_pbwow_config($config_name, $config_value);
-
-				// Enable/disable Battle.net profile fields when the API is enabled/disabled
-				if ($config_name == 'bnetchars_enable')
-				{
-					$this->toggle_game_cpf('bnet', $config_value);
-				}
 			}
 		}
 
@@ -241,41 +184,12 @@ class pbwow_module
 				'L_PBWOW_DB_GOOD'      => sprintf($user->lang['PBWOW_DB_GOOD'], $this->pbwow_config_table),
 				'L_PBWOW_DB_BAD'       => sprintf($user->lang['PBWOW_DB_BAD'], $this->pbwow_config_table),
 
-				'L_PBWOW_CHARSDB_GOOD' => sprintf($user->lang['PBWOW_CHARSDB_GOOD'], $this->pbwow_chars_table),
-				'L_PBWOW_CHARSDB_BAD'  => sprintf($user->lang['PBWOW_CHARSDB_BAD'], $this->pbwow_chars_table),
-
 				'U_ACTION'             => $this->u_action,
 			)
 		);
 
 		if ($mode == 'overview')
 		{
-			$pb_bnet_host =			(isset($cpflist['pb_bnet_host']) 		&& $cpflist['pb_bnet_host']['field_active'] 		&& !$cpflist['pb_bnet_host']['field_no_view']) ? true : false;
-			$pb_bnet_realm =		(isset($cpflist['pb_bnet_realm']) 		&& $cpflist['pb_bnet_realm']['field_active'] 		&& !$cpflist['pb_bnet_realm']['field_no_view']) ? true : false;
-			$pb_bnet_name =			(isset($cpflist['pb_bnet_name']) 		&& $cpflist['pb_bnet_name']['field_active'] 		&& !$cpflist['pb_bnet_name']['field_no_view']) ? true : false;
-			$pb_bnet_url =			(isset($cpflist['pb_bnet_url']) 		&& $cpflist['pb_bnet_url']['field_active']			&& !$cpflist['pb_bnet_url']['field_no_view']) ? true : false;
-			$pb_bnet_avatar =		(isset($cpflist['pb_bnet_avatar']) 		&& $cpflist['pb_bnet_avatar']['field_active'] 		&& !$cpflist['pb_bnet_avatar']['field_no_view']) ? true : false;
-			$pb_wow_race =			(isset($cpflist['pb_wow_race']) 		&& $cpflist['pb_wow_race']['field_active'] 			&& !$cpflist['pb_wow_race']['field_no_view']) ? true : false;
-			$pb_wow_gender =		(isset($cpflist['pb_wow_gender']) 		&& $cpflist['pb_wow_gender']['field_active'] 		&& !$cpflist['pb_wow_gender']['field_no_view']) ? true : false;
-			$pb_wow_class =			(isset($cpflist['pb_wow_class']) 		&& $cpflist['pb_wow_class']['field_active'] 		&& !$cpflist['pb_wow_class']['field_no_view']) ? true : false;
-			$pb_wow_level =			(isset($cpflist['pb_wow_level']) 		&& $cpflist['pb_wow_level']['field_active'] 		&& !$cpflist['pb_wow_level']['field_no_view']) ? true : false;
-			$pb_wow_guild =			(isset($cpflist['pb_wow_guild']) 		&& $cpflist['pb_wow_guild']['field_active'] 		&& !$cpflist['pb_wow_guild']['field_no_view']) ? true : false;
-			$pb_diablo_class =		(isset($cpflist['pb_diablo_class']) 	&& $cpflist['pb_diablo_class']['field_active'] 		&& !$cpflist['pb_diablo_class']['field_no_view']) ? true : false;
-			$pb_diablo_gender =		(isset($cpflist['pb_diablo_gender']) 	&& $cpflist['pb_diablo_gender']['field_active'] 	&& !$cpflist['pb_diablo_gender']['field_no_view']) ? true : false;
-			$pb_diablo_follower = 	(isset($cpflist['pb_diablo_follower']) 	&& $cpflist['pb_diablo_follower']['field_active'] 	&& !$cpflist['pb_diablo_follower']['field_no_view']) ? true : false;
-			$pb_wildstar_race =		(isset($cpflist['pb_wildstar_race']) 	&& $cpflist['pb_wildstar_race']['field_active'] 	&& !$cpflist['pb_wildstar_race']['field_no_view']) ? true : false;
-			$pb_wildstar_gender =	(isset($cpflist['pb_wildstar_gender']) 	&& $cpflist['pb_wildstar_gender']['field_active'] 	&& !$cpflist['pb_wildstar_gender']['field_no_view']) ? true : false;
-			$pb_wildstar_class =	(isset($cpflist['pb_wildstar_class']) 	&& $cpflist['pb_wildstar_class']['field_active'] 	&& !$cpflist['pb_wildstar_class']['field_no_view']) ? true : false;
-			$pb_wildstar_path =		(isset($cpflist['pb_wildstar_path']) 	&& $cpflist['pb_wildstar_path']['field_active'] 	&& !$cpflist['pb_wildstar_path']['field_no_view']) ? true : false;
-
-			$pb_wow_enabled = 		$pb_wow_race && $pb_wow_gender && $pb_wow_class && $pb_wow_level && $pb_wow_guild;
-			$pb_diablo_enabled = 	$pb_diablo_class && $pb_diablo_gender && $pb_diablo_follower;
-			$pb_wildstar_enabled = 	$pb_wildstar_race && $pb_wildstar_gender && $pb_wildstar_class && $pb_wildstar_path;
-
-			$pb_wow_activate_url = $this->u_action . '&game=wow&enable=' . ($pb_wow_enabled ? '0' : '1');
-			$pb_diablo_activate_url = $this->u_action . '&game=diablo&enable=' . ($pb_diablo_enabled ? '0' : '1');
-			$pb_wildstar_activate_url = $this->u_action . '&game=wildstar&enable=' . ($pb_wildstar_enabled ? '0' : '1');
-
 			$pb_charsdb_flush_url = $this->u_action . '&charsdb_flush=1';
 
 			$template->assign_vars(array(
@@ -287,44 +201,7 @@ class pbwow_module
 					'STYLE_VERSION'         => (isset($style_version)) ? $style_version : '',
 					'STYLE_VERSION_V'       => (isset($versions['style_version'])) ? $versions['style_version'] : '',
 					'U_VERSIONCHECK_FORCE'  => append_sid($this->u_action . '&amp;versioncheck_force=1'),
-					'S_ALLOW_CURL'          => $allow_curl,
 
-					'S_CPF_ON_MEMBERLIST'   => ($config['load_cpf_memberlist'] == 1) ? true : false,
-					'S_CPF_ON_VIEWPROFILE'  => ($config['load_cpf_viewprofile'] == 1) ? true : false,
-					'S_CPF_ON_VIEWTOPIC'    => ($config['load_cpf_viewtopic'] == 1) ? true : false,
-
-					'S_PB_WOW'              => $pb_wow_enabled,
-					'S_PB_DIABLO'           => $pb_diablo_enabled,
-					'S_PB_WILDSTAR'         => $pb_wildstar_enabled,
-					'U_PB_WOW'              => $pb_wow_activate_url,
-					'U_PB_DIABLO'           => $pb_diablo_activate_url,
-					'U_PB_WILDSTAR'         => $pb_wildstar_activate_url,
-
-					'S_BNETCHARS_ACTIVE'    => (isset($this->pbwow_config['bnetchars_enable']) && $this->pbwow_config['bnetchars_enable']) ? true : false,
-					'S_BNETCHARS_CONSTOKAY' => ($chars_constokay) ? true : false,
-					'S_BNETCHARS_DBOKAY'    => ($chars_dbokay) ? true : false,
-					'BNET_APIKEY'			=> isset($this->pbwow_config['bnet_apikey']) ? $this->pbwow_config['bnet_apikey'] : false,
-					'U_CHARSDB_FLUSH'       => $pb_charsdb_flush_url,
-					'S_PB_BNET_HOST'        => $pb_bnet_host,
-					'S_PB_BNET_REALM'       => $pb_bnet_realm,
-					'S_PB_BNET_NAME'        => $pb_bnet_name,
-					'S_PB_BNET_URL'         => $pb_bnet_url,
-					'S_PB_BNET_AVATAR'      => $pb_bnet_avatar,
-					'S_PB_WOW_RACE'         => $pb_wow_race,
-					'S_PB_WOW_GENDER'       => $pb_wow_gender,
-					'S_PB_WOW_CLASS'        => $pb_wow_class,
-					'S_PB_WOW_LEVEL'        => $pb_wow_level,
-					'S_PB_WOW_GUILD'        => $pb_wow_guild,
-					'S_PB_DIABLO_CLASS'     => $pb_diablo_class,
-					'S_PB_DIABLO_GENDER'    => $pb_diablo_gender,
-					'S_PB_DIABLO_FOLLOWER'  => $pb_diablo_follower,
-					'S_PB_WILDSTAR_RACE'    => $pb_wildstar_race,
-					'S_PB_WILDSTAR_GENDER'  => $pb_wildstar_gender,
-					'S_PB_WILDSTAR_CLASS'   => $pb_wildstar_class,
-					'S_PB_WILDSTAR_PATH'    => $pb_wildstar_path,
-
-					'S_LEGACY_CONSTANTS'    => $legacy_constants,
-					'S_LEGACY_DB_ACTIVE'    => $legacy_db_active,
 				)
 			);
 		}
@@ -408,30 +285,6 @@ class pbwow_module
 		$db->sql_freeresult($result);
 
 		return $profile_fields_list;
-	}
-
-	/**
-	 * Toggle profile fields of individual games
-	 */
-	function toggle_game_cpf($game, $enable)
-	{
-		global $db;
-
-		$value = $enable ? '1' : '0';
-		$sql = 'UPDATE ' . $this->fields_table . "
-			SET field_active = '" . $value . "'
-			WHERE field_ident " . $db->sql_like_expression($db->get_any_char() . 'pb_' . $game . $db->get_any_char());
-		$db->sql_query($sql);
-	}
-
-	/**
-	 * Clears/flushes the Battle.net API characters table
-	 */
-	function charsdb_flush()
-	{
-		global $db;
-
-		$db->sql_query('DELETE FROM ' . $this->pbwow_chars_table . ' WHERE 1=1');
 	}
 
 ##################################################

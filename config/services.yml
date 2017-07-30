@@ -3,7 +3,7 @@ imports:
 
 services:
     paybas.pbwow.core:
-        class: paybas\pbwow\core\pbwow
+        class: paybas\pbwow\core\pbwowstyle
         arguments:
             - @config
             - @cache
@@ -11,16 +11,14 @@ services:
             - @dbal.tools
             - @dispatcher
             - @ext.manager
-            - @profilefields.manager
             - @template
             - @user
             - @path_helper
             - %core.root_path%
             - %core.php_ext%
             - %tables.pbwow3_config%
-            - %tables.pbwow3_chars%
-    paybas.pbwow.listener:
-        class: paybas\pbwow\event\listener
+    paybas.pbwow.stylelistener:
+        class: paybas\pbwow\event\stylelistener
         arguments:
             - @paybas.pbwow.core
         tags:
