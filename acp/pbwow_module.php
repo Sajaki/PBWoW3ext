@@ -60,10 +60,9 @@ class pbwow_module
 			$ext_manager = $phpbb_container->get('ext.manager');
 			$ext_meta_manager = $ext_manager->create_extension_metadata_manager('paybas/pbwow', $template);
 			$ext_meta_data = $ext_meta_manager->get_metadata('version');
-			$ext_version = isset($ext_meta_data['version']) ? $ext_meta_data['version'] : '';
+			$ext_version = isset($ext_meta_data) ? $ext_meta_data : '';
 
 			$style_root = ($phpbb_root_path . 'styles/pbwow3/');
-
 			// Get the PBWoW style version from the style.cfg file
 			if (file_exists($style_root . 'style.cfg'))
 			{
@@ -366,7 +365,7 @@ class pbwow_module
 			$version_helper->force_stability('stable');
 			$versions = $version_helper->get_versions_matching_stability($force_update, false);
 
-			$latest_version_a  = $versions['3.0'];
+			$latest_version_a  = $versions['3.2'];
 			$cache->put('pbwow_versioncheck', $latest_version_a);
 		}
 		return $latest_version_a;

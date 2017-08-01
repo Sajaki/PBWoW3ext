@@ -64,7 +64,7 @@ $lang = array_merge($lang, array(
 	'PBWOW_EXT_VERSION'					=> 'Version de l’extension',
 	'PBWOW_STYLE_VERSION'				=> 'Version du style',
 	'PBWOW_VERSION_ERROR'				=> 'Impossible de déterminer la version !',
-	'PBWOW_CHECK_UPDATE'				=> 'Vérifier <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> pour voir s’il y a des mises à jour disponibles.',
+	'PBWOW_CHECK_UPDATE'				=> 'Vérifie <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> s’il y a une mise à jour.',
 
 	'PBWOW_CPF_CHECK'					=> 'Vérification des champs de profil personnalisés',
 	//'PBWOW_CPF_CREATE_LOCATION'			=> 'Créer ou activer ces champs depuis le panneau d’administration > Utilisateurs et Groupes > Champs de profil personnalisés',
