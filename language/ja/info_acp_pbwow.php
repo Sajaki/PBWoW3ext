@@ -47,7 +47,6 @@ $lang = array_merge($lang, array(
 
 	'LOG_PBWOW_CONFIG'			=> '<strong>PBWoW の設定が変更されました</strong><br />&raquo; %s',
 
-
 	// OVERVIEW //
 
 	'PBWOW_OVERVIEW_TITLE'				=> 'PBWoW 拡張機能の概要',
@@ -66,36 +65,9 @@ $lang = array_merge($lang, array(
 	'PBWOW_VERSION_ERROR'				=> 'バージョンを確認することができません！',
 	'PBWOW_CHECK_UPDATE'				=> '更新が利用可能な場合は<a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a>を確認して下さい。',
 
-	'PBWOW_CPF_CHECK'					=> 'カスタムプロフィールフィールドのチェック',
-	//'PBWOW_CPF_CREATE_LOCATION'			=> 'Create or enable this field via ACP > Users and Groups > Custom profile fields',
-	'PBWOW_CPF_LOAD_LOCATION'			=> 'AdminCP > メイン > 掲示板の構成 > 掲示板の機能 経由でこれを有効にします',
-	'PBWOW_GAME_EXPLAIN'				=> 'このゲームのカスタムプロフィールフィールドは現在無効です。',
-
-	'PBWOW_BNETCHARS_CHECK'				=> 'Battle.net API キャラクター情報は機能しています',
-	'PBWOW_CHARSDB_GOOD'				=> 'PBWoW キャラクターテーブルが見つかりました (%s)',
-	'PBWOW_CHARSDB_BAD'					=> 'PBWoW キャラクターテーブルが見つかりませんでした。データベースにテーブル(%s)が存在することを確認してください。',
-	'PBWOW_CHARSDB_BAD_EXPLAIN'			=> '要求された PBWoW 3 Battle.net キャラクターデータベーステーブルは PBWoW 拡張機能を有効にした時に自動的にインストールされます。アンインストールしてデータを削除してから再度インストールしなおしてみてください。',
-	'PBWOW_CHARSDB_FLUSH'				=> 'キャラクターテーブルのフラッシュ/クリア',
-	'PBWOW_CHARSDB_FLUSH_EXPLAIN'		=> 'これはDBに格納されたBattle.netのキャラクター情報を全てクリアします。必要なときに再度自動的に取得されます。',
-	'PBWOW_CURL_BAD'					=> 'あなたのサーバーは&quot;cURL&quot;が有効ではありません！',
-	'PBWOW_CURL_BAD_EXPLAIN'			=> 'サーバーの設定を確認するかサーバー管理者へお問い合わせください。cURLが有効に鳴るまでBattle.net APIは無効です。',
-
 	'PBWOW_DONATE'						=> 'PBWoWへ寄付',
 	'PBWOW_DONATE_SHORT'				=> 'PBWoWへ寄付をします',
 	'PBWOW_DONATE_EXPLAIN'				=> 'PBWoW は 100% 無料です。それは私の趣味で自分の時間とお金を費やしているプロジェクトです。あなたがPBWoWを使用して楽しむ場合は、寄付をすることをご検討ください。私は実際にそれをいただければ幸いです。付帯条件はありません。',
-
-
-	// LEGACY CHECKS //
-
-	'PBWOW_LEGACY_CHECK'				=> 'PBWoW 従来のチェック',
-
-	'PBWOW_LEGACY_CONSTANTS'			=> 'PBWoW 従来の定数',
-	'PBWOW_LEGACY_CONSTANTS_EXPLAIN'	=> '検出した場合、これはPBWoWのv1またはv2のモジュールがまだ(部分的に)有効であることを意味します！これは潜在的なエラーに繋がる可能性があります。私達は最新のphpBBのバージョンにアップグレードする前に、アクティブナ(PBWoW)のモジュールをアンインストールすることを強く促す理由です。それか、クリーンphpBBバージョンをインストールするか、phpBBのインストーラーのデータベースアップデートを使用します。',
-	'PBWOW_LEGACY_DATABASE'				=> 'PBWoW 従来のデータベース',
-	'PBWOW_LEGACY_DATABASE_EXPLAIN'		=> 'PBWoW v1またはv2のコンフィグテーブルがまだ有効です。PBWoW 3 はそれと相互作用しないため、これは問題ありません。しかし、必要な(そしてそれをもう使用しない)場合、テーブルをDROP/削除出来ます。',
-
-	'PBWOW_LEGACY_NONE'					=> '古いPBWoWバージョンの明らかな潜在的に問題の痕跡が見つかりませんでした。これは良いです。',
-
 
 	// CONFIG //
 
@@ -133,24 +105,6 @@ $lang = array_merge($lang, array(
 	'PBWOW_VIDEOBG_ALLPAGES_EXPLAIN'	=> 'デフォルトでは、<u>index.php</u>ページ上でのみ動画背景(利用可能な場合)を読み込みます。全てのページでこれを有効に出来ますが、訪問者の閲覧速度に影響をあたえるかもしれません。(ただし、彼らはローカルにキャッシュするため、サーバーの帯域は一般的ではありません)【動画が有効な場合のみ適用されます】',
 	'PBWOW_FIXEDBG'						=> '背景位置を固定する',
 	'PBWOW_FIXEDBG_EXPLAIN'				=> '背景位置の固定はコンテンツの残りの部分と一緒にスクロールされることを防ぐことが出来ます。いくつかの低解像度デバイスは全体の背景画像を見るためのオプションを持っていないことに注意してください。',
-
-	'PBWOW_AVATARS'						=> 'ゲームアバター',
-	'PBWOW_AVATARS_ENABLE'				=> '掲示板全体のゲームアバター(及びアイコン)を有効にする',
-	'PBWOW_AVATARS_ENABLE_EXPLAIN'		=> '有効にした場合、ユーザーがカスタムアバターを設定していると掲示板は生成されたゲームアバター(プロフィールフィールドエントリーを元に)を表示します。',
-	'PBWOW_AVATARS_PATH'				=> 'ゲームアバターのパス',
-	'PBWOW_AVATARS_PATH_EXPLAIN'		=> 'ゲームアバターが格納されるphpBBのルートディレクトリ配下のパス(例 <samp>images/avatars/gaming</samp>)です。<br />キャラクターアイコンもこのパスが設定されていることが必要です。',
-	'PBWOW_SMALLRANKS_ENABLE'			=> '小さいランク画像を使用する',
-	'PBWOW_SMALLRANKS_ENABLE_EXPLAIN'	=> 'アバター(PBWoW.comにするよう)に重なる小さなランク画像を使用したい場合、これを有効にします。大きなランク画像を使用する場合はこれを有効にしないでください。',
-
-	'PBWOW_BNET_APIKEY'					=> 'Battle.net API キー',
-	'PBWOW_BNET_APIKEY_EXPLAIN'			=> 'Battle.net ゲームのAPIキーを入力します。APIキーを持っていない場合、<a href="https://dev.battle.net/member/register">Mashery アカウント</a>を作成することで取得できます。',
-	'PBWOW_BNETCHARS'					=> 'Battle.net キャラクター情報',
-	'PBWOW_BNETCHARS_ENABLE'			=> 'Battle.net API キャラクター情報を有効にする',
-	'PBWOW_BNETCHARS_ENABLE_EXPLAIN'	=> 'ユーザープロフィールに使用するためにキャラクター情報(利用可能なとき)を受け取るためにBattle.net APIを使用するにはこの機能を有効にします。Battle.netを表示するために<u>ゲームアバター</u>設定を有効にしなければなりません！',
-	'PBWOW_BNETCHARS_CACHETIME'			=> 'キャッシュの有効期間',
-	'PBWOW_BNETCHARS_CACHETIME_EXPLAIN'	=> 'Battle.net APIから受け取った後にキャラクター情報をキャッシュする有効期間(秒)を設定します。多少頻繁にキャラクター情報を更新するためにこれを変更することが出来ます。86400 = 24時間',
-	'PBWOW_BNETCHARS_TIMEOUT'			=> 'API クエリーのタイムアウト',
-	'PBWOW_BNETCHARS_TIMEOUT_EXPLAIN'	=> 'Battle.net APIリクエストのタイムアウト間隔(秒)を設定します。基本的にはBattle.netの応答をスクリプトが待機する最大時間を意味します。あなたは(正しい)データが時間通りに受信されていないと思う場合は、これを大きく出来ますが、ページの読み込み時間が増えます！',
 
 	'PBWOW_ADS_INDEX'					=> 'インデックス広告ブロック',
 	'PBWOW_ADS_INDEX_ENABLE'			=> 'インデックス広告を有効にする',
