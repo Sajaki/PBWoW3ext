@@ -7,3 +7,6 @@
 6 characters_3_0_2_schema
 7 profile_fields_3_0_3
 8 release_3_0_4
+9 release_3_0_5
+10 release_3_2_0
+11 release_3_2_0_data
