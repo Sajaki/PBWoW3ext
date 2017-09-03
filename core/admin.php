@@ -8,7 +8,7 @@
  *
  */
 
-namespace paybas\pbwow\core;
+namespace paybas\pbwowext\core;
 
 use phpbb\db\tools;
 use phpbb\version_helper;

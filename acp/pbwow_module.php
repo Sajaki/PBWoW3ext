@@ -7,13 +7,13 @@
  *
  */
 
-namespace paybas\pbwow\acp;
-use paybas\pbwow\core\admin;
+namespace paybas\pbwowext\acp;
+use paybas\pbwowext\core\admin;
 
 /**
  * Class pbwow_module
  *
- * @package paybas\pbwow\acp
+ * @package paybas\pbwowext\acp
  */
 class pbwow_module extends admin
 {
@@ -35,13 +35,13 @@ class pbwow_module extends admin
 
 		$db_tools = $phpbb_container->get('dbal.tools');
 
-		$this->pbwow_config_table = $phpbb_container->getParameter('tables.pbwow3_config');
+		$this->pbwow_config_table = $phpbb_container->getParameter('tables.pbwowext_config');
 
 		$dbokay = $new_config = $ext_version = false;
 
 		// if yes, check if the config table exists
 		// if yes, load the config variables
-		if ($this->pbwow_config_table == ($table_prefix . 'pbwow3_config'))
+		if ($this->pbwow_config_table == ($table_prefix . 'pbwowext_config'))
 		{
 			if ($db_tools->sql_table_exists($this->pbwow_config_table))
 			{
@@ -53,7 +53,7 @@ class pbwow_module extends admin
 
 		// Get the PBWoW extension version from the composer.json file
 		$ext_manager = $phpbb_container->get('ext.manager');
-		$ext_meta_manager = $ext_manager->create_extension_metadata_manager('paybas/pbwow', $template);
+		$ext_meta_manager = $ext_manager->create_extension_metadata_manager('paybas/pbwowext', $template);
 		$ext_meta_data = $ext_meta_manager->get_metadata('version');
 		$ext_version = isset($ext_meta_data) ? $ext_meta_data : '';
 
@@ -271,7 +271,7 @@ class pbwow_module extends admin
 	{
 		global $cache, $db;
 
-		if (($this->pbwow_config = $cache->get('pbwow_config')) !== true)
+		if (($this->pbwow_config = $cache->get('pbwowext_config')) !== true)
 		{
 			$this->pbwow_config = array();
 
@@ -284,7 +284,7 @@ class pbwow_module extends admin
 			}
 			$db->sql_freeresult($result);
 
-			$cache->put('pbwow_config', $this->pbwow_config);
+			$cache->put('pbwowext_config', $this->pbwow_config);
 		}
 	}
 
@@ -325,7 +325,7 @@ class pbwow_module extends admin
 		global $user, $cache;
 
 		//get latest productversion from cache
-		$latest_version_a = $cache->get('pbwow_versioncheck');
+		$latest_version_a = $cache->get('pbwowext_versioncheck');
 		$filename = 'pbwowext.json';
 
 		//if update is forced or cache expired then make the call to refresh latest productversion
@@ -334,20 +334,20 @@ class pbwow_module extends admin
 			$data = parent::curl($user->lang['PBWOW_CHECK_URL'] , false, false, false);
 			if (0 === count($data) )
 			{
-				$cache->destroy('pbwow_versioncheck');
+				$cache->destroy('pbwowext_versioncheck');
 				trigger_error($user->lang['PBWOW_VERSION_ERROR'], E_USER_WARNING);
 				return false;
 			}
 
 			$response = $data['response'];
 			$latest_version = json_decode($response, true);
-			$latest_version_a = $latest_version['stable']['3.2'];
+			$latest_version_array = $latest_version['stable']['3.2'];
 
 			//put this info in the cache
-			$cache->put('pbwow_versioncheck', $latest_version_a, $ttl);
+			$cache->put('pbwowext_versioncheck', $latest_version_array, $ttl);
 		}
 
-		return $latest_version_a;
+		return $latest_version_array;
 	}
 
 

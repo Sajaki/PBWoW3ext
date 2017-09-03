@@ -32,9 +32,8 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// Extension modules
-	'ACP_PBWOW3_CATEGORY'		=> 'PBWoW 3',
-	'ACP_PBWOW3_OVERVIEW'		=> 'Overview',
-	'ACP_PBWOW3_CONFIG'			=> 'Configuration',
+	'ACP_PBWOWEXT_CATEGORY'		=> 'PBWoW 3',
+	'ACP_PBWOWEXT_CONFIG'			=> 'Configuration',
 
 	// Common
 	'PBWOW_ACTIVE'				=> 'active',

@@ -2,8 +2,8 @@ imports:
     - { resource: tables.yml }
 
 services:
-    paybas.pbwow.core:
-        class: paybas\pbwow\core\pbwowstyle
+    paybas.pbwowext.core:
+        class: paybas\pbwowext\core\pbwowstyle
         arguments:
             - @config
             - @cache
@@ -16,10 +16,10 @@ services:
             - @path_helper
             - %core.root_path%
             - %core.php_ext%
-            - %tables.pbwow3_config%
-    paybas.pbwow.stylelistener:
-        class: paybas\pbwow\event\stylelistener
+            - %tables.pbwowext_config%
+    paybas.pbwowext.stylelistener:
+        class: paybas\pbwowext\event\stylelistener
         arguments:
-            - @paybas.pbwow.core
+            - @paybas.pbwowext.core
         tags:
             - { name: event.listener }

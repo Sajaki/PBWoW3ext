@@ -1,3 +1,2 @@
 parameters:
-    tables.pbwow3_config: %core.table_prefix%pbwow3_config
-    tables.pbwow3_chars: %core.table_prefix%pbwow3_chars
+    tables.pbwowext_config: %core.table_prefix%pbwowext_config

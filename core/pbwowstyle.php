@@ -7,7 +7,7 @@
  *
  */
 
-namespace paybas\pbwow\core;
+namespace paybas\pbwowext\core;
 
 use phpbb\cache\service;
 use phpbb\config\config;

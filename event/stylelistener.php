@@ -7,28 +7,28 @@
  *
  */
 
-namespace paybas\pbwow\event;
+namespace paybas\pbwowext\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class stylelistener
  *
- * @package paybas\pbwow\event
+ * @package paybas\pbwowext\event
  */
 class stylelistener implements EventSubscriberInterface
 {
 	/**
-	 * @var \paybas\pbwow\core\pbwowstyle
+	 * @var \paybas\pbwowext\core\pbwowstyle
 	 */
 	protected $pbwowstyle;
 
 	/**
 	 * stylelistener constructor.
 	 *
-	 * @param \paybas\pbwow\core\pbwowstyle $pbwow_style
+	 * @param \paybas\pbwowext\core\pbwowstyle $pbwow_style
 	 */
-	public function __construct(\paybas\pbwow\core\pbwowstyle $pbwowstyle)
+	public function __construct(\paybas\pbwowext\core\pbwowstyle $pbwowstyle)
 	{
 		$this->pbwowstyle = $pbwowstyle;
 	}
