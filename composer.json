@@ -3,7 +3,7 @@
     "type": "phpbb-extension",
     "description": "This extension enhances the pbWoW style",
     "homepage": "https://github.com/bbdkp/PBWoW3ext",
-    "version": "3.2.0",
+    "version": "3.2",
     "time": "2017-07-31",
     "license": "GPL-2.0",
     "authors": [
@@ -29,7 +29,7 @@
     "extra": {
         "display-name": "PBWoW 3 Extension",
         "soft-require": {
-            "phpbb/phpbb": ">=3.2.0"
+            "phpbb/phpbb": ">=3.2"
         },
         "version-check": {
             "host": "avathar.be",

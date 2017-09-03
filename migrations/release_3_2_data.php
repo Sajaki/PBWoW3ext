@@ -9,11 +9,11 @@
 
 namespace paybas\pbwow\migrations;
 
-class release_3_2_0_data extends \phpbb\db\migration\migration
+class release_3_2_data extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
-		return array('\paybas\pbwow\migrations\release_3_2_0');
+		return array('\paybas\pbwow\migrations\release_3_2');
 	}
 
 	public function update_data()

@@ -8,13 +8,14 @@
  */
 
 namespace paybas\pbwow\acp;
+use paybas\pbwow\core\admin;
 
 /**
  * Class pbwow_module
  *
  * @package paybas\pbwow\acp
  */
-class pbwow_module
+class pbwow_module extends admin
 {
 	public $u_action;
 
@@ -27,25 +28,21 @@ class pbwow_module
 	 */
 	public function main($id, $mode)
 	{
-		global $cache, $config, $request, $template, $user;
+		global $cache, $config, $request, $template, $user, $language;
 		global $phpbb_log, $phpbb_root_path, $table_prefix, $phpbb_container;
 
-		$user->add_lang('acp/board');
 		$this->tpl_name = 'acp_pbwow3';
 
 		$db_tools = $phpbb_container->get('dbal.tools');
 
 		$this->pbwow_config_table = $phpbb_container->getParameter('tables.pbwow3_config');
 
-		$constantsokay = $dbokay = $new_config = $ext_version = false;
+		$dbokay = $new_config = $ext_version = false;
 
-		// Check if constants have been set correctly
 		// if yes, check if the config table exists
 		// if yes, load the config variables
 		if ($this->pbwow_config_table == ($table_prefix . 'pbwow3_config'))
 		{
-			$constantsokay = true;
-
 			if ($db_tools->sql_table_exists($this->pbwow_config_table))
 			{
 				$dbokay = true;
@@ -54,37 +51,27 @@ class pbwow_module
 			}
 		}
 
-		if ($mode == 'overview')
+		// Get the PBWoW extension version from the composer.json file
+		$ext_manager = $phpbb_container->get('ext.manager');
+		$ext_meta_manager = $ext_manager->create_extension_metadata_manager('paybas/pbwow', $template);
+		$ext_meta_data = $ext_meta_manager->get_metadata('version');
+		$ext_version = isset($ext_meta_data) ? $ext_meta_data : '';
+
+		// Get the PBWoW style version from the style.cfg file
+		$style_root = ($phpbb_root_path . 'styles/pbwow3/');
+		if (file_exists($style_root . 'style.cfg'))
 		{
-			// Get the PBWoW extension version from the composer.json file
-			$ext_manager = $phpbb_container->get('ext.manager');
-			$ext_meta_manager = $ext_manager->create_extension_metadata_manager('paybas/pbwow', $template);
-			$ext_meta_data = $ext_meta_manager->get_metadata('version');
-			$ext_version = isset($ext_meta_data) ? $ext_meta_data : '';
-
-			$style_root = ($phpbb_root_path . 'styles/pbwow3/');
-			// Get the PBWoW style version from the style.cfg file
-			if (file_exists($style_root . 'style.cfg'))
-			{
-				$values = parse_cfg_file($style_root . 'style.cfg');
-				$style_version = (isset($values['style_version'])) ? $values['style_version'] : '';
-			}
-
-			$versions = $this->version_check($request->variable('versioncheck_force', false));
-
+			$values = parse_cfg_file($style_root . 'style.cfg');
+			$style_version = (isset($values['style_version'])) ? $values['style_version'] : '';
 		}
+
+		$versions = $this->version_check($request->variable('versioncheck_force', false));
 
 		/**
 		 *    Config vars
 		 */
 		switch ($mode)
 		{
-			case 'overview':
-				$display_vars = array(
-					'title' => 'PBWOW_OVERVIEW_TITLE',
-					'vars'  => array()
-				);
-				break;
 			case 'config':
 				$display_vars = array(
 					'title' => 'PBWOW_CONFIG_TITLE',
@@ -157,12 +144,9 @@ class pbwow_module
 
 		if ($submit)
 		{
-			if ($mode != 'overview')
-			{
-				$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_PBWOW_CONFIG');
-				$cache->purge();
-				trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
-			}
+			$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_PBWOW_CONFIG');
+			$cache->purge();
+			trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
 		}
 
 		$this->page_title = $display_vars['title'];
@@ -175,34 +159,53 @@ class pbwow_module
 				'S_ERROR'              => (sizeof($error)) ? true : false,
 				'ERROR_MSG'            => implode('<br />', $error),
 
-				'S_CONSTANTSOKAY'      => ($constantsokay) ? true : false,
 				'PBWOW_DBTABLE'        => $this->pbwow_config_table,
 				'S_DBOKAY'             => ($dbokay) ? true : false,
-				'S_CURL_DANGER'        => isset($this->pbwow_config['bnetchars_enable']) && $this->pbwow_config['bnetchars_enable'] && !$allow_curl,
-
 				'L_PBWOW_DB_GOOD'      => sprintf($user->lang['PBWOW_DB_GOOD'], $this->pbwow_config_table),
 				'L_PBWOW_DB_BAD'       => sprintf($user->lang['PBWOW_DB_BAD'], $this->pbwow_config_table),
 
+				'U_VERSIONCHECK_FORCE'  => append_sid($this->u_action . '&amp;versioncheck_force=1'),
+				'EXT_VERSION'           => $ext_version,
+				'STYLE_VERSION'         => $style_version,
+				'PBWOW_LATESTVERSION'   => $versions['current'],
+				'STYLE_LATESTVERSION'   => $versions['style_version'],
+
 				'U_ACTION'             => $this->u_action,
+
 			)
 		);
 
-		if ($mode == 'overview')
+		if (phpbb_version_compare($versions['current'], $ext_version, '='))
 		{
-			$pb_charsdb_flush_url = $this->u_action . '&charsdb_flush=1';
+			$template->assign_vars(array(	'S_PBWOW_OK'    => true));
 
-			$template->assign_vars(array(
-					'S_INDEX'               => true,
+		}
+		else if (phpbb_version_compare($versions['current'],$ext_version, '>'))
+		{
+			// you have an old version
+			$template->assign_vars(array('S_PBWOW_OLD'    => true));
+		}
+		else
+		{
+			// you have a prerelease or development version
+			$template->assign_vars(array('S_PBWOW_PRERELEASE'    => true));
+		}
 
-					'S_CHECK_V'             => (empty($versions)) ? false : true,
-					'EXT_VERSION'           => $ext_version,
-					'EXT_VERSION_V'         => (isset($versions['current'])) ? $versions['current'] : '',
-					'STYLE_VERSION'         => (isset($style_version)) ? $style_version : '',
-					'STYLE_VERSION_V'       => (isset($versions['style_version'])) ? $versions['style_version'] : '',
-					'U_VERSIONCHECK_FORCE'  => append_sid($this->u_action . '&amp;versioncheck_force=1'),
 
-				)
-			);
+		if (phpbb_version_compare($versions['style_version'], $style_version, '='))
+		{
+			$template->assign_vars(array(	'S_STYLE_OK'    => true));
+
+		}
+		else if (phpbb_version_compare($versions['style_version'], $style_version, '>'))
+		{
+			// you have an old version
+			$template->assign_vars(array('S_STYLE_OLD'    => true));
+		}
+		else
+		{
+			// you have a prerelease or development version
+			$template->assign_vars(array('S_STYLE_PRERELEASE'    => true));
 		}
 
 		// Output relevant page
@@ -255,42 +258,11 @@ class pbwow_module
 		}
 	}
 
-##################################################
-####                                          ####
-####              Board Settings              ####
-####                                          ####
-##################################################
-
-	/**
-	 * Get a list of all available profile fields, so
-	 * we can check if they are configured correctly.
-	 */
-	function get_profile_fields_list()
-	{
-		global $db;
-
-		$sql = 'SELECT *
-			FROM ' . $this->fields_table . "
-			WHERE field_active = 1
-			ORDER BY field_order";
-		$result = $db->sql_query($sql);
-
-		$profile_fields_list = array();
-
-		while ($row = $db->sql_fetchrow($result))
-		{
-			$profile_fields_list[$row['field_name']] = $row;
-		}
-		$db->sql_freeresult($result);
-
-		return $profile_fields_list;
-	}
-
-##################################################
-####                                          ####
-####             Config Functions             ####
-####                                          ####
-##################################################
+	##################################################
+	####                                          ####
+	####             Config Functions             ####
+	####                                          ####
+	##################################################
 
 	/**
 	 * Get PBWoW config.
@@ -342,32 +314,42 @@ class pbwow_module
 	}
 
 	/**
-	 * Obtains the latest version information.
+	 * retrieve latest pbwow version
+	 *
+	 * @param  bool $force_update Ignores cached data. Defaults to false.
+	 * @param  int  $ttl          Cache version information for $ttl seconds. Defaults to 86400 (24 hours).
+	 * @return bool
 	 */
-	public function version_check($force_update = false)
+	public final function version_check($force_update = false, $ttl = 86400)
 	{
-		global $cache, $config, $user;
+		global $user, $cache;
 
-		$host = 'www.avathar.be';
-		$directory = '/versioncheck';
-		$filename = 'pbwowext.json';
-		$port = 80;
-		$timeout = 5;
-
+		//get latest productversion from cache
 		$latest_version_a = $cache->get('pbwow_versioncheck');
+		$filename = 'pbwowext.json';
+
+		//if update is forced or cache expired then make the call to refresh latest productversion
 		if ($latest_version_a === false || $force_update)
 		{
-			$errstr = '';
-			$errno = 0;
-			$version_helper = new \phpbb\version_helper($cache, $config, new \phpbb\file_downloader(), $user);
-			$version_helper->set_current_version($cache->get('pbwow_versioncheck'));
-			$version_helper->set_file_location($host, $directory, $filename, false);
-			$version_helper->force_stability('stable');
-			$versions = $version_helper->get_versions_matching_stability($force_update, false);
+			$data = parent::curl($user->lang['PBWOW_CHECK_URL'] , false, false, false);
+			if (0 === count($data) )
+			{
+				$cache->destroy('pbwow_versioncheck');
+				trigger_error($user->lang['PBWOW_VERSION_ERROR'], E_USER_WARNING);
+				return false;
+			}
 
-			$latest_version_a  = $versions['3.2'];
-			$cache->put('pbwow_versioncheck', $latest_version_a);
+			$response = $data['response'];
+			$latest_version = json_decode($response, true);
+			$latest_version_a = $latest_version['stable']['3.2'];
+
+			//put this info in the cache
+			$cache->put('pbwow_versioncheck', $latest_version_a, $ttl);
 		}
+
 		return $latest_version_a;
 	}
+
+
+
 }

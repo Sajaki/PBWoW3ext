@@ -13,70 +13,41 @@
 	</div>
 <!-- ENDIF -->
 
-<!-- IF S_INDEX or not S_CONSTANTSOKAY or not S_DBOKAY -->
+<!-- IF not S_DBOKAY -->
 <fieldset>
 	<legend>{L_PBWOW_DB_CHECK}</legend>
-	<!-- IF S_CONSTANTSOKAY -->
 		<!-- IF S_DBOKAY -->
 		<p class="success"><strong>{L_PBWOW_DB_GOOD}</strong></p>
 		<!-- ELSE -->
 		<p class="error"><strong>{L_PBWOW_DB_BAD}</strong></p>
 		<p>{L_PBWOW_DB_BAD_EXPLAIN}</p>
 		<!-- ENDIF -->
-	<!-- ELSE -->
-		<p class="error"><strong>{L_PBWOW_FATAL}</strong></p>
-	<!-- ENDIF -->
 </fieldset>
 <!-- ENDIF -->
 
-<!-- IF S_INDEX -->
-	<!-- IF S_DBOKAY -->
+<!-- IF S_DBOKAY -->
 	<fieldset>
 		<legend>{L_PBWOW_VERSION_CHECK}</legend>
 		<dl>
 			<dt><label>{L_PBWOW_EXT_VERSION}</label></dt>
 			<dd>
-			<!-- IF EXT_VERSION -->
-				<!-- IF EXT_VERSION_V -->
-				<strong class="<!-- IF EXT_VERSION == EXT_VERSION_V -->success<!-- ELSE -->error<!-- ENDIF -->">{EXT_VERSION}</strong>&nbsp;&nbsp;&nbsp;({L_PBWOW_LATEST_VERSION}{L_COLON} {EXT_VERSION_V})
-				<!-- ELSE -->
-				{EXT_VERSION}
-				<!-- ENDIF -->
-			<!-- ELSE -->
-				<strong class="error">{L_PBWOW_VERSION_ERROR}</strong>
-			<!-- ENDIF -->
+				<strong class="<!-- IF S_PBWOW_OK -->success<!-- ELSEIF S_PBWOW_OLD -->error<!-- ELSE -->syntaxcomment<!-- ENDIF -->">{EXT_VERSION}</strong>
+				<!-- IF not S_PBWOW_OK -->({L_PBWOW_LATEST_VERSION}{L_COLON} {PBWOW_LATESTVERSION})<!-- ENDIF -->
 			</dd>
 		</dl>
 		<dl>
 			<dt><label>{L_PBWOW_STYLE_VERSION}</label></dt>
 			<dd>
-			<!-- IF STYLE_VERSION -->
-				<!-- IF STYLE_VERSION_V -->
-				<strong class="<!-- IF STYLE_VERSION == STYLE_VERSION_V -->success<!-- ELSE -->error<!-- ENDIF -->">{STYLE_VERSION}</strong>&nbsp;&nbsp;&nbsp;({L_PBWOW_LATEST_VERSION}{L_COLON} {STYLE_VERSION_V})
-				<!-- ELSE -->
-				{STYLE_VERSION}
-				<!-- ENDIF -->
-			<!-- ELSE -->
-				<strong class="error">{L_PBWOW_VERSION_ERROR}</strong>
-			<!-- ENDIF -->
+				<strong class="<!-- IF S_STYLE_OK -->success<!-- ELSEIF S_STYLE_OLD -->error<!-- ELSE -->syntaxcomment<!-- ENDIF -->">{STYLE_VERSION}</strong>
+				<!-- IF not S_STYLE_OK -->({L_PBWOW_LATEST_STYLE_VERSION}{L_COLON} {STYLE_LATESTVERSION})<!-- ENDIF -->
 			</dd>
 		</dl>
 		<dl>
 			<dt><p><small>{L_PBWOW_CHECK_UPDATE}</small></p></dt>
-			<dd><!-- IF not S_CHECK_V --><strong class="error">{L_VERSIONCHECK_FAIL}</strong><!-- ENDIF -->
+			<dd><!-- IF not PBWOW_LATESTVERSION --><strong class="error">{L_VERSIONCHECK_FAIL}</strong><!-- ENDIF -->
 			<a href="{U_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a></dd>
 		</dl>
 	</fieldset>
-
-	<fieldset>
-		<legend>{L_PBWOW_DONATE}</legend>
-			<dl>
-				<dt><label>{L_PBWOW_DONATE_SHORT}{L_COLON}</label><br /><span>{L_PBWOW_DONATE_EXPLAIN}</span></dt>
-				<dd><a href="http://www.avathar.be/bbdkp/app.php/page/donate" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" alt="Donate using PayPal" style="cursor:pointer"></a></dd>
-			</dl>
-	</fieldset>
-
-	<!-- ENDIF -->
 <!-- ENDIF -->
 
 <!-- IF S_DBOKAY -->
@@ -102,7 +73,6 @@
 	<!-- END auth_tpl -->
 <!-- ENDIF -->
 
-<!-- IF not S_INDEX -->
 	</fieldset>
 	<fieldset>
 		<legend>{L_ACP_SUBMIT_CHANGES}</legend>
@@ -111,10 +81,20 @@
 			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
 		</p>
 		{S_FORM_TOKEN}
-<!-- ENDIF -->
 	</fieldset>
 </form>
-
 <!-- ENDIF -->
+
+
+<!-- IF S_DBOKAY -->
+<fieldset>
+	<legend>{L_PBWOW_DONATE}</legend>
+	<dl>
+		<dt><label>{L_PBWOW_DONATE_SHORT}{L_COLON}</label><br /><span>{L_PBWOW_DONATE_EXPLAIN}</span></dt>
+		<dd><a href="{L_PBWOW_DONATE_URL}" target="_blank"><img src="{L_PAYPAL_IMAGE_URL}" border="0" alt="{L_PAYPAL_ALT}" style="cursor:pointer"></a></dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
 
 <!-- INCLUDE overall_footer.html -->

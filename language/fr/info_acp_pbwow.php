@@ -49,7 +49,6 @@ $lang = array_merge($lang, array(
 
 
 	// OVERVIEW //
-
 	'PBWOW_OVERVIEW_TITLE'				=> 'Vue d’ensemble de l’extension PBWoW',
 	'PBWOW_OVERVIEW_TITLE_EXPLAIN'		=> 'Merci d’utiliser PBWoW, nous espérons que cela vous plaira.',
 	'ACP_PBWOW_INDEX_SETTINGS'			=> 'Informations générales',
@@ -63,9 +62,14 @@ $lang = array_merge($lang, array(
 	'PBWOW_LATEST_VERSION'				=> 'Dernière version',
 	'PBWOW_EXT_VERSION'					=> 'Version de l’extension',
 	'PBWOW_STYLE_VERSION'				=> 'Version du style',
+	'PBWOW_LATEST_STYLE_VERSION'		=> 'Dernière version du Style',
 	'PBWOW_VERSION_ERROR'				=> 'Impossible de déterminer la version !',
 	'PBWOW_CHECK_UPDATE'				=> 'Vérifie <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> s’il y a une mise à jour.',
 
+	'PBWOW_CHECK_URL'                   => 'http://www.avathar.be/versioncheck/pbwowext.json',
+	'PBWOW_DONATE_URL'                  => 'http://www.avathar.be/bbdkp/app.php/page/donate',
+	'PAYPAL_IMAGE_URL'                  => 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png',
+	'PAYPAL_ALT'                        => 'Donation PayPal',
 	'PBWOW_DONATE'						=> 'Faire un don à PBWoW',
 	'PBWOW_DONATE_SHORT'				=> 'Faire un don à PBWoW',
 	'PBWOW_DONATE_EXPLAIN'				=> 'PBWoW est 100% libre. ce projet est un passe-temps où je consacre mon temps et mon argent, juste pour le plaisir. Si vous appréciez PBWoW, vous pouvez envisager de faire un don. Il sera grandement apprécié. Sans contrepartie.',

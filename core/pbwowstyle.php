@@ -208,6 +208,7 @@ class pbwowstyle
 		$this->template->append_var('BODY_CLASS', $body_class);
 	}
 
+
 	/**
 	 * Gets the PBWoW config data from the DB, or the cache if it is present
 	 */
@@ -232,4 +233,6 @@ class pbwowstyle
 			$this->cache->put('pbwow_config', $this->pbwow_config);
 		}
 	}
+
+
 }
