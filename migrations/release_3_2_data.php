@@ -3,17 +3,18 @@
  *
  * @package PBWoW Extension
  * @copyright (c) 2015 PayBas
+ * @copyright (c) 2017 Sajaki
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
 
-namespace paybas\pbwow\migrations;
+namespace paybas\pbwowext\migrations;
 
-class release_3_0_0_data extends \phpbb\db\migration\migration
+class release_3_2_data extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
-		return array('\paybas\pbwow\migrations\release_3_0_0_schema');
+		return array('\paybas\pbwowext\migrations\release_3_2_schema');
 	}
 
 	public function update_data()
@@ -25,9 +26,9 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 
 	public function pbwow_populate_data()
 	{
-		if ($this->db_tools->sql_table_exists($this->table_prefix . 'pbwow3_config'))
+		if ($this->db_tools->sql_table_exists($this->table_prefix . 'pbwowext_config'))
 		{
-			$sql = 'SELECT * FROM ' . $this->table_prefix . 'pbwow3_config';
+			$sql = 'SELECT * FROM ' . $this->table_prefix . 'pbwowext_config';
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
 
@@ -62,10 +63,18 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 			),
 			array(
 				'config_name' => 'topbar_code',
-				'config_value' => '<li class="icon1 small-icon" data-skip-responsive="true"><strong>Hi there! This is a welcome message.</strong></li>
-<li class="icon2 small-icon link"><a href="http://www.avathar.be/bbdkp/">avathar.be</a></li>
-<li class="icon3 small-icon link"><a href="https://www.phpbb.com/">phpBB</a></li>
-<li class="icon4 small-icon link rightside"><a href="#">On the right</a></li>',
+				'config_value' =>'<li data-last-responsive="true" class="leftside">
+<i class="icon fa-cubes fa-fw" aria-hidden="true"></i>&nbsp;<span><strong>Hi there! This is a welcome message</strong></span>
+</li>
+<li data-last-responsive="true" class="leftside"  ><a href="http://www.avathar.be" title="avathar.be" role="menuitem">
+<i class="icon fa-heart fa-fw" aria-hidden="true"></i><span>avathar.be</span></a>
+</li>
+<li data-last-responsive="true" class="leftside"><a href="https://www.phpbb.com" title="phpBB" role="menuitem">
+<i class="icon fa-globe fa-fw" aria-hidden="true"></i><span>phpBB</span></a>
+</li>
+<li data-last-responsive="true" class="rightside"><a href="#" title="On the right" role="menuitem">
+<i class="icon fa-hand-o-right fa-fw" aria-hidden="true"></i><span>On the right</span></a>
+</li>',
 				'config_default' => '',
 			),
 			array(
@@ -124,52 +133,16 @@ class release_3_0_0_data extends \phpbb\db\migration\migration
 			),
 			array(
 				'config_name' => 'headerlinks_code',
-				'config_value' => '<li class="icon-portal small-icon"><a href="http://www.phpbb.com/" target="_blank">phpBB</a></li>',
+				'config_value' => '<li data-last-responsive="true" class="leftside">
+<a href="http://www.phpbb.com/" title="link" target="_blank" role="menuitem">
+<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>phpBB</span></a>
+</li>',
 				'config_default' => '',
 			),
 
-			// Avatars & Ranks
-			array(
-				'config_name' => 'avatars_enable',
-				'config_value' => '1',
-				'config_default' => '1',
-			),
-			array(
-				'config_name' => 'avatars_path',
-				'config_value' => 'images/avatars/gaming',
-				'config_default' => 'images/avatars/gaming',
-			),
-
-			array(
-				'config_name' => 'smallranks_enable',
-				'config_value' => '0',
-				'config_default' => '0',
-			),
-
-			// Battle.net API
-			array(
-				'config_name' => 'bnetchars_enable',
-				'config_value' => '0',
-				'config_default' => '0',
-			),
-			array(
-				'config_name' => 'bnet_apikey',
-				'config_value' => '',
-				'config_default' => '',
-			),
-			array(
-				'config_name' => 'bnetchars_cachetime',
-				'config_value' => '86400',
-				'config_default' => '86400',
-			),
-			array(
-				'config_name' => 'bnetchars_timeout',
-				'config_value' => '2',
-				'config_default' => '2',
-			),
 		);
 
-		$sql = $this->db->sql_multi_insert($this->table_prefix . 'pbwow3_config', $sql_ary);
+		$sql = $this->db->sql_multi_insert($this->table_prefix . 'pbwowext_config', $sql_ary);
 		$this->sql_query($sql);
 	}
 }
