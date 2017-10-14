@@ -1,18 +1,20 @@
+{% INCLUDECSS '@paybas_pbwowext/pbwowext.css' %}
 {% if S_PBLOGO %}
 <style>
-#logo {
-	background: url("{{ PBLOGO_SRC }}") no-repeat 50% 50%;
+	#logo {
+		background: url("{{ PBLOGO_SRC }}") no-repeat 50% 50%;
 	width: {{ PBLOGO_WIDTH }}px;
 	height: {{ PBLOGO_HEIGHT }}px;
-	{% if PBLOGO_MARGINS %} margin: {{ PBLOGO_MARGINS }};{% endif %}
-}
-
-@media screen and (max-width: 859px) {
-	#logo {
-		background-size: 100% 100%;
-		width: {{ PBLOGO_WIDTH_MOB }}px;
-		height: {{ PBLOGO_HEIGHT_MOB }}px;
+	{% if PBLOGO_MARGINS %}margin: {{ PBLOGO_MARGINS }};{% endif %}
 	}
-}
+
+	@media screen and (max-width: 859px) {
+		#logo {
+			background-size: 100% 100%;
+		width: {{ PBLOGO_WIDTH_MOB }}px;
+	height: {{ PBLOGO_HEIGHT_MOB }}px;
+	}
+	}
 </style>
 {% endif %}
+

@@ -1,100 +1,100 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
 <a name="maincontent"></a>
 
-<h1>{L_TITLE}</h1>
+<h1>{{ lang('TITLE') }}</h1>
 
-<p>{L_TITLE_EXPLAIN}</p>
+<p>{{ lang('TITLE_EXPLAIN') }}</p>
 
-<!-- IF S_ERROR -->
-	<div class="errorbox">
-		<h3>{L_WARNING}</h3>
-		<p>{ERROR_MSG}</p>
-	</div>
-<!-- ENDIF -->
+{% if S_ERROR %}
+<div class="errorbox">
+	<h3>{{ lang('WARNING') }}</h3>
+	<p>{{ ERROR_MSG }}</p>
+</div>
+{% endif %}
 
-<!-- IF not S_DBOKAY -->
+{% if not S_DBOKAY %}
 <fieldset>
-	<legend>{L_PBWOW_DB_CHECK}</legend>
-		<!-- IF S_DBOKAY -->
-		<p class="success"><strong>{L_PBWOW_DB_GOOD}</strong></p>
-		<!-- ELSE -->
-		<p class="error"><strong>{L_PBWOW_DB_BAD}</strong></p>
-		<p>{L_PBWOW_DB_BAD_EXPLAIN}</p>
-		<!-- ENDIF -->
+	<legend>{{ lang('PBWOW_DB_CHECK') }}</legend>
+	{% if S_DBOKAY %}
+	<p class="success"><strong>{{ lang('PBWOW_DB_GOOD') }}</strong></p>
+	{% else %}
+	<p class="error"><strong>{{ lang('PBWOW_DB_BAD') }}</strong></p>
+	<p>{{ lang('PBWOW_DB_BAD_EXPLAIN') }}</p>
+	{% endif %}
 </fieldset>
-<!-- ENDIF -->
+{% endif %}
 
-<!-- IF S_DBOKAY -->
-	<fieldset>
-		<legend>{L_PBWOW_VERSION_CHECK}</legend>
-		<dl>
-			<dt><label>{L_PBWOW_EXT_VERSION}</label></dt>
-			<dd>
-				<strong class="<!-- IF S_PBWOW_OK -->success<!-- ELSEIF S_PBWOW_OLD -->error<!-- ELSE -->syntaxcomment<!-- ENDIF -->">{EXT_VERSION}</strong>
-				<!-- IF not S_PBWOW_OK -->({L_PBWOW_LATEST_VERSION}{L_COLON} {PBWOW_LATESTVERSION})<!-- ENDIF -->
-			</dd>
-		</dl>
-		<dl>
-			<dt><label>{L_PBWOW_STYLE_VERSION}</label></dt>
-			<dd>
-				<strong class="<!-- IF S_STYLE_OK -->success<!-- ELSEIF S_STYLE_OLD -->error<!-- ELSE -->syntaxcomment<!-- ENDIF -->">{STYLE_VERSION}</strong>
-				<!-- IF not S_STYLE_OK -->({L_PBWOW_LATEST_STYLE_VERSION}{L_COLON} {STYLE_LATESTVERSION})<!-- ENDIF -->
-			</dd>
-		</dl>
-		<dl>
-			<dt><p><small>{L_PBWOW_CHECK_UPDATE}</small></p></dt>
-			<dd><!-- IF not PBWOW_LATESTVERSION --><strong class="error">{L_VERSIONCHECK_FAIL}</strong><!-- ENDIF -->
-			<a href="{U_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a></dd>
-		</dl>
-	</fieldset>
-<!-- ENDIF -->
-
-<!-- IF S_DBOKAY -->
-<form id="acp_pbwow" method="post" action="{U_ACTION}">
-<!-- BEGIN options -->
-	<!-- IF options.S_LEGEND -->
-		<!-- IF not options.S_FIRST_ROW -->
-			</fieldset>
-		<!-- ENDIF -->
-		<fieldset>
-			<legend>{options.LEGEND}</legend>
-	<!-- ELSE -->
-		<dl>
-			<dt><label for="{options.KEY}">{options.TITLE}{L_COLON}</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
-			<dd>{options.CONTENT}</dd>
-		</dl>
-	<!-- ENDIF -->
-<!-- END options -->
-
-<!-- IF S_AUTH -->
-	<!-- BEGIN auth_tpl -->
-		{auth_tpl.TPL}
-	<!-- END auth_tpl -->
-<!-- ENDIF -->
-
-	</fieldset>
-	<fieldset>
-		<legend>{L_ACP_SUBMIT_CHANGES}</legend>
-		<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
-		</p>
-		{S_FORM_TOKEN}
-	</fieldset>
-</form>
-<!-- ENDIF -->
-
-
-<!-- IF S_DBOKAY -->
+{% if S_DBOKAY %}
 <fieldset>
-	<legend>{L_PBWOW_DONATE}</legend>
+	<legend>{{ lang('PBWOW_VERSION_CHECK') }}</legend>
 	<dl>
-		<dt><label>{L_PBWOW_DONATE_SHORT}{L_COLON}</label><br /><span>{L_PBWOW_DONATE_EXPLAIN}</span></dt>
-		<dd><a href="{L_PBWOW_DONATE_URL}" target="_blank"><img src="{L_PAYPAL_IMAGE_URL}" border="0" alt="{L_PAYPAL_ALT}" style="cursor:pointer"></a></dd>
+		<dt><label>{{ lang('PBWOW_EXT_VERSION') }}</label></dt>
+		<dd>
+			<strong class="{% if S_PBWOW_OK %}success{% elseif S_PBWOW_OLD %}error{% else %}syntaxcomment{% endif %}">{{ EXT_VERSION }}</strong>
+			{% if not S_PBWOW_OK %}({{ lang('PBWOW_LATEST_VERSION') }}{{ lang('COLON') }} {{ PBWOW_LATESTVERSION }}){% endif %}
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('PBWOW_STYLE_VERSION') }}</label></dt>
+		<dd>
+			<strong class="{% if S_STYLE_OK %}success{% elseif S_STYLE_OLD %}error{% else %}syntaxcomment{% endif %}">{{ STYLE_VERSION }}</strong>
+			{% if not S_STYLE_OK %}({{ lang('PBWOW_LATEST_STYLE_VERSION') }}{{ lang('COLON') }} {{ STYLE_LATESTVERSION }}){% endif %}
+		</dd>
+	</dl>
+	<dl>
+		<dt><p><small>{{ lang('PBWOW_CHECK_UPDATE') }}</small></p></dt>
+		<dd>{% if not PBWOW_LATESTVERSION %}<strong class="error">{{ lang('VERSIONCHECK_FAIL') }}</strong>{% endif %}
+			<a href="{{ U_VERSIONCHECK_FORCE }}">{{ lang('VERSIONCHECK_FORCE_UPDATE') }}</a></dd>
 	</dl>
 </fieldset>
-<!-- ENDIF -->
+{% endif %}
+
+{% if S_DBOKAY %}
+<form id="acp_pbwow" method="post" action="{{ U_ACTION }}">
+	{% for options in loops.options %}
+	{% if options.S_LEGEND %}
+	{% if not options.S_FIRST_ROW %}
+	</fieldset>
+	{% endif %}
+	<fieldset>
+		<legend>{{ options.LEGEND }}</legend>
+		{% else %}
+		<dl>
+			<dt><label for="{{ options.KEY }}">{{ options.TITLE }}{{ lang('COLON') }}</label>{% if options.S_EXPLAIN %}<br /><span>{{ options.TITLE_EXPLAIN }}</span>{% endif %}</dt>
+			<dd>{{ options.CONTENT }}</dd>
+		</dl>
+		{% endif %}
+		{% endfor %}
+
+		{% if S_AUTH %}
+		{% for auth_tpl in loops.auth_tpl %}
+		{{ auth_tpl.TPL }}
+		{% endfor %}
+		{% endif %}
+
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('ACP_SUBMIT_CHANGES') }}</legend>
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+		</p>
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+</form>
+{% endif %}
 
 
-<!-- INCLUDE overall_footer.html -->
+{% if S_DBOKAY %}
+<fieldset>
+	<legend>{{ lang('PBWOW_DONATE') }}</legend>
+	<dl>
+		<dt><label>{{ lang('PBWOW_DONATE_SHORT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('PBWOW_DONATE_EXPLAIN') }}</span></dt>
+		<dd><a href="{{ lang('PBWOW_DONATE_URL') }}" target="_blank"><img src="{{ lang('PAYPAL_IMAGE_URL') }}" border="0" alt="{{ lang('PAYPAL_ALT') }}" style="cursor:pointer"></a></dd>
+	</dl>
+</fieldset>
+{% endif %}
+
+
+{% INCLUDE 'overall_footer.html' %}

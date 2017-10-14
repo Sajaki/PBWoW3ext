@@ -1,9 +1,9 @@
-<!-- IF TOPBAR_CODE -->
+{% if TOPBAR_CODE %}
 <div id="top-bar">
 	<div class="inner">
-		<ul class="linklist"><!-- EVENT top_bar_links_before --><!-- EVENT quickstyle_event -->{TOPBAR_CODE}<!-- EVENT top_bar_links_after --></ul>
+		<ul class="linklist">{% EVENT top_bar_links_before %}{% EVENT quickstyle_event %}{{ TOPBAR_CODE }}{% EVENT top_bar_links_after %}</ul>
 	</div>
 </div>
-<!-- ENDIF -->
+{% endif %}
 
-<!-- IF S_VIDEOBG and (S_INDEX or S_VIDEOBG_ALL) and not S_IS_BOT  --><div id="video-background"><div id="video-container"></div></div><!-- ENDIF -->
+{% if S_VIDEOBG and (S_INDEX or S_VIDEOBG_ALL) and not S_IS_BOT  %}<div id="video-background"><div id="video-container"></div></div>{% endif %}

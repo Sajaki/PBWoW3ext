@@ -1,0 +1,172 @@
+/**********************
+*                     *
+* pbwow extension css *
+*                     *
+***********************/
+
+/* Top-bar
+--------------------------------------------- */
+#top-bar {
+  background: url("./images/bar-bg.jpg") no-repeat scroll 50% 100% #002540;
+  border-bottom: 1px solid #05517E;
+  box-shadow: 0 0 3px 3px #000000;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 40px;
+  color: #FFF;
+  text-shadow: 1px 1px #000000;
+  position: relative;
+  z-index: 1;
+}
+
+#top-bar > .inner {
+  border-right: 3px solid #042E45;
+  border-left: 1px solid #011323;
+  height: 40px;
+  margin: 0 auto;
+  max-width: 990px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#top-bar .linklist > li {
+  border-left: 2px solid #042E45;
+  border-right: 1px solid #011323;
+  margin: 0;
+  padding: 0 15px;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+#top-bar .linklist > li.link {
+  padding: 0;
+}
+
+#top-bar .linklist > li.link > a {
+  padding: 0 15px !important;
+  display: block;
+  font-weight: bold;
+}
+
+#top-bar .linklist > li.link > a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  text-shadow: 0 0 7px rgba(255, 255, 255, 0.4);
+}
+
+#top-bar li.responsive-menu {
+  border: none !important;
+  line-height: 20px;
+  margin: 5px;
+  padding: 3px;
+}
+
+/* Adjust the background (and videos) if top-bar is active */
+body.topbar {
+  background-position: 49.999% 41px;
+}
+
+body.topbar-fixed #top-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 40;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+}
+
+body.topbar-fixed #wrap {
+  margin-top: 41px;
+}
+
+body.topbar .navblock {
+  margin-top: 1px;
+}
+
+#top-bar ul.linklist > li.rightside, p.rightside, a.rightside {
+  float: right;
+  margin-right: 0;
+  margin-left: 7px;
+  text-align: right;
+}
+
+/* video background css
+---------------------------------------------------- */
+body.pbwow3 #video-background {
+  top: 41px;
+  display: inline;
+}
+
+#video-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#video-container {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  top: 0;
+  z-index: -1000;
+}
+
+#video-container video {
+  opacity: 0;
+}
+
+#video-border {
+  position: absolute;
+  width: 100%;
+  z-index: -999;
+}
+
+/* fixed background
+---------------------------------------------------- */
+body.fixedbg {
+  background-attachment: fixed;
+}
+
+body.fixedbg #video-background {
+  position: fixed;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  z-index: -1; /* Conflicts with page-body box-shadow, when enabled f*cks up chrome fixed pos */
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  body.fixedbg #video-background { z-index: auto; }
+}
+
+/* misc
+---------------------------------------------------- */
+
+#darken {
+  background-color: #000;
+  opacity: 0.75;
+}
+
+
+/* Recent Topics Advertisement block customisations
+---------------------------------------------------- */
+
+.advertisement, .misc-block.advertisement {
+  margin: 10px auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+.donate-button {
+  background: url('./images/donate.jpg') no-repeat 0 0;
+  display: block;
+  width: 300px;
+  height: 220px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.donate-button:hover {
+  background-position: 0 -220px;
+}

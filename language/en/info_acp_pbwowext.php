@@ -104,12 +104,13 @@ $lang = array_merge($lang, array(
 	'PBWOW_VIDEOBG_ENABLE_EXPLAIN'		=> 'Some PBWoW styles support special animated video backgrounds (not all). You can enable these for cool effect, or disable them to save bandwidth (or if you are having problems).',
 	'PBWOW_VIDEOBG_ALLPAGES'			=> 'Display video backgrounds on all pages?',
 	'PBWOW_VIDEOBG_ALLPAGES_EXPLAIN'	=> 'By default, PBWoW only loads the video backgrounds (if available) on <u>index.php</u> pages. You can enable them for all pages, but this may affect the browsing speed of your visitors (but in general not your server bandwidth, because they are cached locally). [only applies if video is enabled]',
-	'PBWOW_FIXEDBG'						=> 'Fixed background position',
-	'PBWOW_FIXEDBG_EXPLAIN'				=> 'Fixing the background position will prevent it from scrolling along with the rest of the content. Keep in mind that some lower resolution devices will have no option to see the entire background image.',
 
-	'PBWOW_ADS_INDEX'					=> 'Index Advertisement Block',
+	'PBWOW_FIXEDBG'						=> 'Fixed background position',
+	'PBWOW_FIXEDBG_EXPLAIN'				=> 'Fixing the background position (including video) will prevent it from scrolling along with the rest of the content. Keep in mind that some lower resolution devices will have no option to see the entire background image.',
+
+	'PBWOW_ADS_INDEX'					=> 'Index Advertisement Block for Recent Topics',
 	'PBWOW_ADS_INDEX_ENABLE'			=> 'Enable index advertisement',
 	'PBWOW_ADS_INDEX_ENABLE_EXPLAIN'	=> 'Enabling this ad will generate a narrow advertisement block on the forum index page (requires Recent Topics extension).',
 	'PBWOW_ADS_INDEX_CODE'				=> 'Index advertisement code',
-	'PBWOW_ADS_INDEX_CODE_EXPLAIN'		=> 'This block is suitable for advertisements with a <u>width</u> of: <b>300px</b>.<br />If you want to use/change custom CSS styling, please add it to <samp>styles/pbwow3/theme/custom.css</samp>',
+	'PBWOW_ADS_INDEX_CODE_EXPLAIN'		=> 'This block is suitable for advertisements with a <u>width</u> of: <b>300px</b>.<br />If you want to use/change custom CSS styling, please add it to <samp>ext/paybas/pbwowext/styles/pbwow3/theme/pbwowext.css</samp>',
 ));
