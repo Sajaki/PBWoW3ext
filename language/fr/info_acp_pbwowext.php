@@ -114,12 +114,13 @@ $lang = array_merge($lang, array(
 	'PBWOW_VIDEOBG_ENABLE_EXPLAIN'		=> 'Permet d’activer les arrière-plans vidéo animés. Certains styles de PBWoW supportent des arrières plans vidéo animés (pas tous). Il est possible d’activer ces derniers pour un rendu original, ou les désactiver pour économiser de la bande passante (ou si des problèmes sont constatés).',
 	'PBWOW_VIDEOBG_ALLPAGES'			=> 'Afficher les arrières plans vidéo sur toutes les pages',
 	'PBWOW_VIDEOBG_ALLPAGES_EXPLAIN'	=> 'Permet d’afficher les arrière-plans vidéo sur toutes les pages du forum. Par défaut, PBWoW charge seulement les arrières plans vidéo (si disponibles) sur la page <u>index.php</u>. Il est possible d’étendre l’affichage des arrières plans vidéo sur toutes les pages, mais cela peut affecter la vitesse de navigation de des visiteurs (pas la bande passante de du serveur, car ils sont mis en cache localement). [ne s’applique que si la vidéo est activée]',
-	'PBWOW_FIXEDBG'						=> 'Fixer la position de l’arrière plan',
-	'PBWOW_FIXEDBG_EXPLAIN'				=> 'Permet de fixer la position de l’arrière plan permet d’éviter le défilement avec le reste du contenu. Garder à l’esprit que certains appareils ayant une faible résolution n’auront pas la possibilité de voir l’image d’arrière plan toute entière.',
 
-	'PBWOW_ADS_INDEX'					=> 'Encart publicitaire sur l’index',
+	'PBWOW_FIXEDBG'						=> 'Fixer la position de l’arrière plan',
+	'PBWOW_FIXEDBG_EXPLAIN'				=> 'Permet de corriger l’emplacement de l’arrière plan (incluant ceux vidéo) afin d’éviter le défilement avec le reste du contenu. Garder à l’esprit que certains appareils ayant une faible résolution n’auront pas la possibilité de voir l’image d’arrière plan toute entière.',
+
+	'PBWOW_ADS_INDEX'					=> 'Encart publicitaire sur l’index pour les sujets récents',
 	'PBWOW_ADS_INDEX_ENABLE'			=> 'Activer l’encart publicitaire sur l’index',
 	'PBWOW_ADS_INDEX_ENABLE_EXPLAIN'	=> 'Permet d’afficher un encart publicitaire sur la page de l’index du forum (requiert l’extension Recent Topics).',
 	'PBWOW_ADS_INDEX_CODE'				=> 'Code de l’encart publicitaire sur l’index',
-	'PBWOW_ADS_INDEX_CODE_EXPLAIN'		=> 'Permet de saisir le code de l’encart publicitaire sur la page de l’index du forum. Cet encart est adapté aux publicités ayant une <u>largeur</u> de : <b>300px</b>.<br />Pour utiliser/modifier un feuille style CSS personnalisée, merci d’ajouter ceci dans le fichier <samp>styles/pbwow3/theme/custom.css</samp>.',
+	'PBWOW_ADS_INDEX_CODE_EXPLAIN'		=> 'Permet de saisir le code de l’encart publicitaire sur la page de l’index du forum. Cet encart est adapté aux publicités ayant une <u>largeur</u> de : <b>300px</b>.<br />Pour utiliser/modifier un feuille style CSS personnalisée, merci d’ajouter ceci dans le fichier <samp>ext/paybas/pbwowext/styles/pbwow3/theme/pbwowext.css</samp>.',
 ));
