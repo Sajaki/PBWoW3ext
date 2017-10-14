@@ -54,7 +54,6 @@ $lang = array_merge($lang, array(
 
 	'LOG_PBWOW_CONFIG'			=> '<strong>Paramètres de PBWoW modifiés</strong><br />&raquo; %s',
 
-
 	// OVERVIEW //
 	'PBWOW_OVERVIEW_TITLE'				=> 'Vue d’ensemble de l’extension PBWoW',
 	'PBWOW_OVERVIEW_TITLE_EXPLAIN'		=> 'Merci d’utiliser PBWoW, nous espérons que cela sera grandement apprécié.',
@@ -81,7 +80,6 @@ $lang = array_merge($lang, array(
 	'PBWOW_DONATE_EXPLAIN'				=> 'PBWoW est 100% libre. ce projet est un passe-temps où je consacre mon temps et mon argent, juste pour le plaisir. Si l’extension PBWoW est appréciée, il est possible de réaliser un don. Il sera grandement apprécié. Sans contrepartie.',
 
 	// CONFIG //
-
 	'PBWOW_CONFIG_TITLE'				=> 'Configuration de PBWoW',
 	'PBWOW_CONFIG_TITLE_EXPLAIN'		=> 'Depuis cette page il est possible de configurer les options de personnalisation du style PBWoW.',
 
