@@ -15,7 +15,8 @@ phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality
   - Custom header-bar (enable/disable, content, fixed to top)
   - Custom header-box links (enable/disable, content)
   - Video background settings (enable/disable, display on all pages or index only, fixed position)
-
+  - Gaming avatar and rank settings
+  
 #### Requirements
 - PhpBB 3.2.x 
 
