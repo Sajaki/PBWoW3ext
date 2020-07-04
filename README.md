@@ -25,7 +25,7 @@ phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality
 - French
 
 ## Installation
-1. [Download the latest release](https://github.com/Sajaki/pbwowext/releases) and unzip it.
+1. [Download the latest release](https://www.avathar.be/forum/app.php/dlext/?view=detail&df_id=37) and unzip it.
 2. Copy the entire contents from the unzipped folder to `phpBB/ext/paybas/pbwowext/`.
 3. Navigate in the ACP to `Customise -> Manage extensions`.
 4. Find `PBWoW 3 Extension` under "Disabled Extensions" and click `Enable`.
