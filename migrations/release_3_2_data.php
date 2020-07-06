@@ -51,8 +51,8 @@ class release_3_2_data extends \phpbb\db\migration\migration
 			),
 			array(
 				'config_name' => 'ads_index_code',
-				'config_value' => '<a class="donate-button" href="https://www.avathar.be/bbdkp/app.php/page/donate"></a>',
-				'config_default' => '<a class="donate-button" href="https://www.avathar.be/bbdkp/app.php/page/donate"></a>',
+				'config_value' => '<a class="donate-button" href="https://www.avathar.be/forum/app.php/page/donate"></a>',
+				'config_default' => '<a class="donate-button" href="https://www.avathar.be/forum/app.php/page/donate"></a>',
 			),
 
 			// Global styling

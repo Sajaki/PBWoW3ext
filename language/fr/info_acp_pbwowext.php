@@ -71,9 +71,9 @@ $lang = array_merge($lang, array(
 	'PBWOW_STYLE_VERSION'				=> 'Version du style',
 	'PBWOW_LATEST_STYLE_VERSION'		=> 'Dernière version du Style',
 	'PBWOW_VERSION_ERROR'				=> 'Impossible de déterminer la version !',
-	'PBWOW_CHECK_UPDATE'				=> 'Vérifie <a href="https://www.avathar.be/bbdkp/index.php">avathar.be</a> s’il y a une mise à jour.',
+	'PBWOW_CHECK_UPDATE'				=> 'Vérifie <a href="https://www.avathar.be/forum/index.php">avathar.be</a> s’il y a une mise à jour.',
 
-	'PBWOW_DONATE_URL'                  => 'https://www.avathar.be/bbdkp/app.php/page/donate',
+	'PBWOW_DONATE_URL'                  => 'https://www.avathar.be/forum/app.php/page/donate',
 	'PAYPAL_IMAGE_URL'                  => 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png',
 	'PAYPAL_ALT'                        => 'Donation PayPal',
 	'PBWOW_DONATE'						=> 'Faire un don à PBWoW',
