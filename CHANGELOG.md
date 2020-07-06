@@ -1,5 +1,8 @@
 ## Changelog
 
+##### 3.2.7 04/07/2020
+- [NEW] add support for bbguild avatars and small rank icons. 
+
 ##### 3.2.6 11/05/2018
 - [FIX] fix curl https links, migrations dependency issue
 

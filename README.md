@@ -4,7 +4,7 @@ PBWoW 3 Extension for phpBB 3.2
 phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality.
 
 ## Version 
-3.2.6 12-05-2018
+3.2.7 04-07-2020
 [![Build Status](https://api.travis-ci.org/Sajaki/pbwowext.svg)](https://travis-ci.org/Sajaki/pbwowext)
 
 ## Features
@@ -15,7 +15,8 @@ phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality
   - Custom header-bar (enable/disable, content, fixed to top)
   - Custom header-box links (enable/disable, content)
   - Video background settings (enable/disable, display on all pages or index only, fixed position)
-
+  - Gaming avatar and rank settings
+  
 #### Requirements
 - PhpBB 3.2.x 
 
@@ -24,7 +25,7 @@ phpBB 3.2 Extension to enhance the PBWoW 3.2 style with additional functionality
 - French
 
 ## Installation
-1. [Download the latest release](https://github.com/Sajaki/pbwowext/releases) and unzip it.
+1. [Download the latest release](https://www.avathar.be/forum/app.php/dlext/?view=detail&df_id=37) and unzip it.
 2. Copy the entire contents from the unzipped folder to `phpBB/ext/paybas/pbwowext/`.
 3. Navigate in the ACP to `Customise -> Manage extensions`.
 4. Find `PBWoW 3 Extension` under "Disabled Extensions" and click `Enable`.

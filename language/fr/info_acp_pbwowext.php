@@ -95,6 +95,12 @@ $lang = array_merge($lang, array(
 	'PBWOW_LOGO_MARGINS'				=> 'Marges du logo',
 	'PBWOW_LOGO_MARGINS_EXPLAIN'		=> 'Permet de définir les marges CSS de son logo. Cela permettra de contrôler davantage le positionnement de son image. Utiliser un balisage CSS valide, exemple <samp>10px 5px 25px 0</samp>.',
 
+	'PBWOW_AVATARS'						=> 'Avatars de jeu',
+	'PBWOW_AVATARS_ENABLE'				=> 'Activer le support étendu des avatars de jeu (et des icônes)',
+	'PBWOW_AVATARS_ENABLE_EXPLAIN'		=> 'Si activé, votre forum affichera un avatar de jeu généré en fonction de bbGuild si l’utilisateur n’a pas configuré d’avatar personnalisé.',
+	'PBWOW_SMALLRANKS_ENABLE'			=> 'Utiliser de petites images de rang',
+	'PBWOW_SMALLRANKS_ENABLE_EXPLAIN'	=> 'Activer cette option pour utiliser de petites images de rang qui se superposent à l’avatar. Ne pas activer cette option si vous utilisez de plus grandes images de rang.',
+
 	'PBWOW_TOPBAR'						=> 'Barre située tout en haut de l’entête',
 	'PBWOW_TOPBAR_ENABLE'				=> 'Activer la barre située au-dessus de l’entête',
 	'PBWOW_TOPBAR_ENABLE_EXPLAIN'		=> 'Permet d’activer la barre au-dessus de l’entête du forum. D’une hauteur de 40px elle sera affichée tout en haut de chaque page du forum.',
