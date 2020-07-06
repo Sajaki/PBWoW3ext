@@ -94,7 +94,7 @@ $lang = array_merge($lang, array(
 	'PBWOW_LOGO_SIZE_EXPLAIN'			=> 'Permet de saisir les dimensions exactes de l’image de son logo (Largeur x Hauteur en pixels).<br />Les images aux dimensions supérieures à 350 x 200 ne sont pas conseillées (en raison de la mise en page réactive).',
 	'PBWOW_LOGO_MARGINS'				=> 'Marges du logo',
 	'PBWOW_LOGO_MARGINS_EXPLAIN'		=> 'Permet de définir les marges CSS de son logo. Cela permettra de contrôler davantage le positionnement de son image. Utiliser un balisage CSS valide, exemple <samp>10px 5px 25px 0</samp>.',
-	
+
 	'PBWOW_AVATARS'						=> 'Avatars de jeu',
 	'PBWOW_AVATARS_ENABLE'				=> 'Activer le support étendu des avatars de jeu (et des icônes)',
 	'PBWOW_AVATARS_ENABLE_EXPLAIN'		=> 'Si activé, votre forum affichera un avatar de jeu généré en fonction de bbGuild si l’utilisateur n’a pas configuré d’avatar personnalisé.',
