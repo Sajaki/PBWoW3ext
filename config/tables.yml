@@ -1,2 +1,2 @@
 parameters:
-    tables.pbwowext_config: %core.table_prefix%pbwowext_config
+    tables.pbwowext_config: '%core.table_prefix%pbwowext_config'
