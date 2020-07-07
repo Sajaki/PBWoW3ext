@@ -1,5 +1,9 @@
 ## Changelog
 
+##### 3.2.8 07/07/2020
+- [FIX] support small rank icons.
+- [FIX] support phpBB 3.3
+
 ##### 3.2.7 04/07/2020
 - [NEW] add support for bbguild avatars and small rank icons. 
 
